@@ -1,12 +1,10 @@
 package dev.program.linkshortener.link;
 
+import dev.program.linkshortener.link.exception.LinkAlreadyExistsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.validation.constraints.AssertTrue;
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LinkServiceImplTest {
     @Test

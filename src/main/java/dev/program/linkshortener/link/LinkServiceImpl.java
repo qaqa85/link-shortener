@@ -1,6 +1,6 @@
 package dev.program.linkshortener.link;
 
-import org.springframework.stereotype.Component;
+import dev.program.linkshortener.link.exception.LinkAlreadyExistsException;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

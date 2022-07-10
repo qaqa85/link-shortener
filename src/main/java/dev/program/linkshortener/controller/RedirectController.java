@@ -1,5 +1,6 @@
-package dev.program.linkshortener.link;
+package dev.program.linkshortener.controller;
 
+import dev.program.linkshortener.link.LinkService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -5,7 +5,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-class LinkDto {
+public class LinkDto {
     String id;
     String email;
     String targetUrl;
