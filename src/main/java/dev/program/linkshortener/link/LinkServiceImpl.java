@@ -1,31 +1,47 @@
 package dev.program.linkshortener.link;
 
-import dev.program.linkshortener.link.exception.LinkAlreadyExistsException;
-import org.springframework.stereotype.Repository;
+import dev.program.linkshortener.link.api.LinkDto;
+import dev.program.linkshortener.link.api.LinkEntity;
+import dev.program.linkshortener.link.api.LinkRepository;
+import dev.program.linkshortener.link.api.exception.LinkAlreadyExistsException;
+import dev.program.linkshortener.link.api.exception.LinkNotFoundException;
+import dev.program.linkshortener.link.api.LinkService;
+import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import javax.transaction.Transactional;
 
-@Repository
+@Component
 class LinkServiceImpl implements LinkService {
 
-    private final HashMap<String, LinkDto> repository;
+    private final LinkRepository repository;
 
-    LinkServiceImpl() {
-        this.repository = new HashMap<>();
+    LinkServiceImpl(LinkRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public LinkDto createLink(LinkDto toDto) {
-        if (repository.containsKey(toDto.getId())) {
-            throw new LinkAlreadyExistsException();
-        }
-        repository.put(toDto.id, toDto);
+        var result = repository.findById(toDto.getId());
 
-        return repository.get(toDto.id);
+        if(result.isPresent())
+            throw new LinkAlreadyExistsException();
+
+        repository.save(LinkEntity.fromDto(toDto));
+
+        return toDto;
     }
 
     @Override
+    @Transactional
     public String getLink(String id) {
-        return repository.get(id).targetUrl;
+        var result = repository.findById(id).orElseThrow(LinkNotFoundException::new);
+        result.setVisits(result.getVisits() + 1);
+
+        return result.getTargetUrl();
+    }
+
+    @Override
+    public LinkDto getLinkDto(String id) {
+        return repository.findById(id).orElseThrow(LinkNotFoundException::new).toDto();
     }
 }

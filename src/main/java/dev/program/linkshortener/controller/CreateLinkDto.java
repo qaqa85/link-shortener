@@ -1,6 +1,6 @@
 package dev.program.linkshortener.controller;
 
-import dev.program.linkshortener.link.LinkDto;
+import dev.program.linkshortener.link.api.LinkDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.Email;

@@ -1,4 +1,4 @@
-package dev.program.linkshortener.link.exception;
+package dev.program.linkshortener.link.api.exception;
 
 public class LinkAlreadyExistsException extends RuntimeException {
 
