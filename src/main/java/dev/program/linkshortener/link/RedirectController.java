@@ -12,8 +12,15 @@ import java.io.IOException;
 @RequestMapping("/s")
 class RedirectController {
 
+    private final LinkService service;
+
+    RedirectController(LinkService service) {
+        this.service = service;
+    }
+
+
     @GetMapping("/{id}")
     public void redirectLink(@PathVariable String id, HttpServletResponse httpServletResponse) throws IOException {
-        httpServletResponse.sendRedirect("https://github.com/qaqa85/link-shortener");
+        httpServletResponse.sendRedirect(service.getLink(id));
     }
 }

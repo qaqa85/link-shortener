@@ -2,16 +2,25 @@ package dev.program.linkshortener.link;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 record CreateLinkDto (
         @Schema(description = "Identifier/alias to link. Used for redirection.", example = "link-alias", required = true)
-            String id,
-            String email,
-            String targetUrl,
-            LocalDate expirationDate,
+        @NotBlank
+        String id,
+        @Email
+        String email,
+        @Size(min = 5, max = 60)
+        String targetUrl,
+        @Future
+        LocalDate expirationDate,
 
-            int visit) {
+        int visit)
+{
 
     LinkDto toDto() {
         return new LinkDto(

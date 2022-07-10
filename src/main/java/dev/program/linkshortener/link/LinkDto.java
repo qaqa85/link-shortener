@@ -2,6 +2,7 @@ package dev.program.linkshortener.link;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 class LinkDto {
@@ -25,5 +26,9 @@ class LinkDto {
                 .path("/s/{id}")
                 .buildAndExpand(id)
                 .toUriString();
+    }
+
+    String getId() {
+        return id;
     }
 }
