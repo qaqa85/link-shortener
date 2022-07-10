@@ -1,6 +1,6 @@
 package dev.program.linkshortener.controller;
 
-import dev.program.linkshortener.link.exception.LinkAlreadyExistsException;
+import dev.program.linkshortener.link.api.exception.LinkAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,5 +16,12 @@ class LinkManagerControllerAdvice {
     @ExceptionHandler(LinkAlreadyExistsException.class)
     ExceptionResponse handleBusinessException(LinkAlreadyExistsException e, WebRequest webRequest) {
         return new ExceptionResponse(e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    @ExceptionHandler
+    ExceptionResponse handleGlobalErrors(Exception e) {
+        return new ExceptionResponse("ERROR - something went wrong");
     }
 }

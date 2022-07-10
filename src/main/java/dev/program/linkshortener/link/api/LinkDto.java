@@ -1,10 +1,14 @@
-package dev.program.linkshortener.link;
+package dev.program.linkshortener.link.api;
 
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
+@Getter
+@Builder
 public class LinkDto {
     String id;
     String email;
@@ -26,9 +30,5 @@ public class LinkDto {
                 .path("/s/{id}")
                 .buildAndExpand(id)
                 .toUriString();
-    }
-
-    String getId() {
-        return id;
     }
 }
