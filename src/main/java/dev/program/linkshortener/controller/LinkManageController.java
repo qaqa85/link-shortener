@@ -1,6 +1,5 @@
 package dev.program.linkshortener.controller;
 
-import dev.program.linkshortener.controller.CreateLinkDto;
 import dev.program.linkshortener.link.LinkDto;
 import dev.program.linkshortener.link.LinkService;
 import org.springframework.http.HttpStatus;
